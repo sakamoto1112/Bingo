@@ -72,11 +72,11 @@
     // イベントの入った９個のマスを作成
     // for(let k = 1; k <= 5; k++) {
 
-    // function makeMasu(masu1, masu2) {
-
-        for (let i = 0; i < 5; i++) {
+    function makeMasu(masu1, masu2, masu3) {
+        console.log(masu3)
+        for (let i = masu1; i < masu1 + 5; i++) {
             const masu = document.createElement("div");
-            masu.textContent = Math.floor(Math.random() * 15 + 01)
+            masu.textContent = Math.floor(Math.random() * 15 + masu2)
             masu.addEventListener("click", () => {
                 if (checkList[i] === 0) {
                     masu.setAttribute("class", "check");
@@ -84,68 +84,18 @@
                     checkList[i] = "★"
                 }
             })
-            document.querySelector(".boad0").appendChild(masu);
+            console.log(masu3)
+            document.querySelector(`.boad${masu3}`).appendChild(masu);
         }
+    }
+
+    makeMasu(0, 01, 0);
+    makeMasu(5, 16, 1);
+    makeMasu(10, 31, 2);
+    makeMasu(15, 46, 3);
+    makeMasu(20, 61, 4);
+
    
-
-    
-
-
-    for (let i = 5; i < 10; i++) {
-        const masu = document.createElement("div");
-        masu.textContent = Math.floor(Math.random() * 15 + 16)
-        masu.addEventListener("click", () => {
-
-            if (checkList[i] === 0) {
-                masu.setAttribute("class", "check");
-                masu.textContent = "★"
-                checkList[i] = "★"
-            }
-        })
-        document.querySelector(".boad1").appendChild(masu);
-    }
-    for (let i = 10; i < 15; i++) {
-        const masu = document.createElement("div");
-        masu.textContent = Math.floor(Math.random() * 15 + 31)
-        masu.addEventListener("click", () => {
-
-            if (checkList[i] === 0) {
-                masu.setAttribute("class", "check");
-                masu.textContent = "★"
-                checkList[i] = "★"
-            }
-        })
-        document.querySelector(".boad2").appendChild(masu);
-    }
-    for (let i = 15; i < 20; i++) {
-        const masu = document.createElement("div");
-        masu.textContent = Math.floor(Math.random() * 15 + 46)
-        masu.addEventListener("click", () => {
-
-            if (checkList[i] === 0) {
-                masu.setAttribute("class", "check");
-                masu.textContent = "★"
-                checkList[i] = "★"
-            }
-        })
-        document.querySelector(".boad3").appendChild(masu);
-    }
-    for (let i = 20; i < 25; i++) {
-        const masu = document.createElement("div");
-        masu.textContent = Math.floor(Math.random() * 15 + 61)
-        masu.addEventListener("click", () => {
-
-            if (checkList[i] === 0) {
-                masu.setAttribute("class", "check");
-                masu.textContent = "★"
-                checkList[i] = "★"
-            }
-        })
-        document.querySelector(".boad4").appendChild(masu);
-    }
-
-
-
     // // boardをクリックする度にbingo判定する
     document.querySelector(".ALL").addEventListener("click", function () {
         //     // チェック用の配列を作る
@@ -179,57 +129,7 @@
             }
         }
 
-        // if (column2.every(n => n === "★")) {                   
-        //     // checkListを全て埋める
-        //     checkList.fill("1");
-        //     // 勝敗を表示する
-        //     const bingo = document.createElement("div");
-        //     bingo.textContent = "BINGO!!";
-        //     bingo.setAttribute("class", "bingo");
-        //     document.body.appendChild(bingo);
-        // }
-
-        // if (column3.every(n => n === "★")) {                   
-        //     // checkListを全て埋める
-        //     checkList.fill("1");
-        //     // 勝敗を表示する
-        //     const bingo = document.createElement("div");
-        //     bingo.textContent = "BINGO!!";
-        //     bingo.setAttribute("class", "bingo");
-        //     document.body.appendChild(bingo);
-        // }
-
-        // if (column4.every(n => n === "★")) {                   
-        //     // checkListを全て埋める
-        //     checkList.fill("1");
-        //     // 勝敗を表示する
-        //     const bingo = document.createElement("div");
-        //     bingo.textContent = "BINGO!!";
-        //     bingo.setAttribute("class", "bingo");
-        //     document.body.appendChild(bingo);
-        // }
-
-        // if (row1.every(n => n === "★")) {                   
-        //     // checkListを全て埋める
-        //     checkList.fill("1");
-        //     // 勝敗を表示する
-        //     const bingo = document.createElement("div");
-        //     bingo.textContent = "BINGO!!";
-        //     bingo.setAttribute("class", "bingo");
-
-        //     document.body.appendChild(bingo);
-        // }
-
-        // if (diagonalA.every(n => n === "★")) {                   
-        //     // checkListを全て埋める
-        //     checkList.fill("1");
-        //     // 勝敗を表示する
-        //     const bingo = document.createElement("div");
-        //     bingo.textContent = "BINGO!!";
-        //     bingo.setAttribute("class", "bingo");
-        //     document.body.appendChild(bingo);
-        // }
-
+        
         checkBingo(column1);
         checkBingo(column2);
         checkBingo(column3);
