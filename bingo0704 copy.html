@@ -8,8 +8,7 @@
     <title>Document</title>
     <style>
         body {
-            background-color: rgb(208, 209, 208);
-            color: aliceblue;
+            background-color: rgb(231, 252, 231);
         }
 
         .ALL {
@@ -45,7 +44,6 @@
             height: 50px;
             width: 504px;
             padding: 10px;
-            /* border: 1px solid black; */
             background-color: green;
             color: white;
             font-size: 40px;
@@ -54,8 +52,6 @@
         }
     </style>
 </head>
-
-
 
 <body>
     <div class="ALL">
@@ -75,50 +71,64 @@
     // for(let k = 1; k <= 5; k++) {
 
     function makeMasu(masu1, masu2, masu3) {
-        console.log(masu3)
-        for (let i = masu1; i < masu1 + 5; i++) {
-            const masu = document.createElement("div");
-            masu.textContent = Math.floor(Math.random() * 15 + masu2)
-            masu.addEventListener("click", () => {
-                if (checkList[i] === 0) {
-                    masu.setAttribute("class", "check");
-                    masu.textContent = "★"
-                    checkList[i] = "★"
-                }
-            })
-            console.log(masu3)
-            document.querySelector(`.boad${masu3}`).appendChild(masu);
+        for (let j = 0; j < 5; j++) {
+            for (let i = masu1; i < masu1 + 5; i++) {
+                // console.log(masu1)
+                // console.log(masu2)
+                // console.log(masu3)
+                const masu = document.createElement("div");
+                masu.textContent = Math.floor(Math.random() * 15 + masu2)
+                console.log(masu3)
+                masu.addEventListener("click", () => {
+                    if (checkList[i] === 0) {
+                        masu.setAttribute("class", "check");
+                        masu.textContent = "★"
+                        checkList[i] = "★"
+                    }
+                })
+                console.log(masu3)
+                document.querySelector(`.boad${masu3}`).appendChild(masu);
+
+
+            }
+
+            masu1 = masu1 + 5;
+            masu2 = masu2 + 15;
+            masu3++;
         }
     }
 
-    makeMasu(0, 01, 0);
-    makeMasu(5, 16, 1);
-    makeMasu(10, 31, 2);
-    makeMasu(15, 46, 3);
-    makeMasu(20, 61, 4);
+    makeMasu(0, 1, 0);
+    // makeMasu(5, 16, 1);
+    // makeMasu(10, 31, 2);
+    // makeMasu(15, 46, 3);
+    // makeMasu(20, 61, 4);
 
-   
-    // // boardをクリックする度にbingo判定する
+
+    // boardをクリックする度にbingo判定する
     document.querySelector(".ALL").addEventListener("click", function () {
-        //     // チェック用の配列を作る
-        //     // タテ
-        column1 = [checkList[0], checkList[1], checkList[2], checkList[3], checkList[4]]
-        column2 = [checkList[5], checkList[6], checkList[7], checkList[8], checkList[9]]
-        column3 = [checkList[10], checkList[11], checkList[12], checkList[13], checkList[14]]
-        column4 = [checkList[15], checkList[16], checkList[17], checkList[18], checkList[19]]
-        column5 = [checkList[20], checkList[21], checkList[22], checkList[23], checkList[24]]
-        // ヨコ
-        row1 = [checkList[0], checkList[5], checkList[10], checkList[15], checkList[20]]
-        row2 = [checkList[1], checkList[6], checkList[11], checkList[16], checkList[21]]
-        row3 = [checkList[2], checkList[7], checkList[12], checkList[17], checkList[22]]
-        row4 = [checkList[3], checkList[8], checkList[13], checkList[18], checkList[23]]
-        row5 = [checkList[4], checkList[9], checkList[14], checkList[19], checkList[24]]
-        // ナナメ
+        // チェック用の配列を作る
+        // タテ：sliceで、開始と終了を指定し連続した要素を取り出す
+        column1 = checkList.slice(0, 5);
+        column2 = checkList.slice(5, 10);
+        column3 = checkList.slice(10, 15);
+        column4 = checkList.slice(15, 20);
+        column5 = checkList.slice(20, 25);
+
+        // ヨコ：filterで、指定された条件式に合う要素を取り出す ※第二引数「i」でインデックスを取得
+        // ↓↓は row1 = [checkList[0], checkList[5], checkList[10], checkList[15], checkList[20]]と同じ 
+        row1 = checkList.filter((n, i) => i % 5 === 0);
+        row2 = checkList.filter((n, i) => i % 5 === 1);
+        row3 = checkList.filter((n, i) => i % 5 === 2);
+        row4 = checkList.filter((n, i) => i % 5 === 3);
+        row5 = checkList.filter((n, i) => i % 5 === 4);
+
+        // ナナメ：短縮するより全部書いた方が分かりやすい
         diagonalA = [checkList[0], checkList[6], checkList[12], checkList[18], checkList[24]]
         diagonalB = [checkList[4], checkList[8], checkList[12], checkList[16], checkList[20]]
-        //     // everyは配列の要素が全て同じ時にtrueを返す
-        //     // everyがtrueを返したら、checkListを全て埋めてクリックできなくする。
 
+        // everyは配列の要素が全て同じ時にtrueを返す
+        // everyがtrueを返したら、checkListを全て埋めてクリックできなくする。
         function checkBingo(checkArray) {
             if (checkArray.every(n => n === "★")) {
                 // checkListを全て埋める
@@ -131,7 +141,7 @@
             }
         }
 
-        
+
         checkBingo(column1);
         checkBingo(column2);
         checkBingo(column3);
